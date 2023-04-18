@@ -1,4 +1,4 @@
-package org.example.tables;
+package org.example.models;
 
 public class Passenger {
     private Long passenger_id;
@@ -6,6 +6,17 @@ public class Passenger {
     private String pass_phone;
     private String pass_country;
     private String pass_city;
+
+    public Passenger(Long passenger_id, String passenger_name, String pass_phone, String pass_country, String pass_city) {
+        this.passenger_id = passenger_id;
+        this.passenger_name = passenger_name;
+        this.pass_phone = pass_phone;
+        this.pass_country = pass_country;
+        this.pass_city = pass_city;
+    }
+
+    public Passenger() {
+    }
 
     public Long getPassenger_id() {
         return passenger_id;

@@ -1,34 +1,19 @@
-package org.example.util;
+package org.example.db_create;
 
 import org.postgresql.copy.CopyManager;
 import org.postgresql.core.BaseConnection;
 
-import java.io.*;
-import java.sql.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class ConnectionUtil {
-    private static final String url = "jdbc:postgresql://localhost:5432/AirportManagementSystem";
-    private static final String user = "postgres";
-    private static final String password = "Klaus67phobia26!";
-
-    /**
-     * This method connects to our database from PostgreSQL.
-     *
-     * @return whether connection established or not, if not and there is an exception, the exception
-     * will be caught.
-     */
-    public Connection connectDB() {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to the PostgreSQL server successfully.");
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
-
+/**
+ * This class is for initial creating of database models.
+ */
+public class Models {
     /**
      * Creates table Company with rows that are inserted from companies.txt file
      * @param conn connects to the database in postgresql
@@ -42,11 +27,11 @@ public class ConnectionUtil {
             System.out.println("Table created");
             long rowsInserted = new CopyManager((BaseConnection) conn)
                     .copyIn("copy company(company_name, found_date) from STDIN (FORMAT CSV, HEADER, DELIMITER ',');",
-                            new BufferedReader(new FileReader("C:/Users/Serge/Desktop/homework_JDBC/companies.txt"))
+                            new BufferedReader(new FileReader("C:\\Users\\Serge\\IdeaProjects\\airport_ms\\src\\main\\resources\\companies.txt"))
                     );
             System.out.println("Rows inserted");
         } catch (SQLException | IOException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -64,11 +49,11 @@ public class ConnectionUtil {
             System.out.println("Table created");
             long rowsInserted = new CopyManager((BaseConnection) conn)
                     .copyIn("copy passenger(passenger_name, pass_phone, pass_country, pass_city) from STDIN (FORMAT CSV, HEADER, DELIMITER ',');",
-                            new BufferedReader(new FileReader("C:/Users/Serge/Desktop/homework_JDBC/passengers.txt"))
+                            new BufferedReader(new FileReader("C:\\Users\\Serge\\IdeaProjects\\airport_ms\\src\\main\\resources\\passengers.txt"))
                     );
             System.out.println("Rows inserted");
         } catch (SQLException | IOException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -88,11 +73,11 @@ public class ConnectionUtil {
             System.out.println("Table created");
             long rowsInserted = new CopyManager((BaseConnection) conn)
                     .copyIn("copy trip(trip_number, company_id, trip_organizer, departure_city, destination_city, time_departure, time_arrival) from STDIN (FORMAT CSV, HEADER, DELIMITER ',');",
-                            new BufferedReader(new FileReader("C:/Users/Serge/Desktop/homework_JDBC/trip.txt"))
+                            new BufferedReader(new FileReader("C:\\Users\\Serge\\IdeaProjects\\airport_ms\\src\\main\\resources\\trip.txt"))
                     );
             System.out.println("Rows inserted");
         } catch (SQLException | IOException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -110,12 +95,11 @@ public class ConnectionUtil {
             System.out.println("Table created");
             long rowsInserted = new CopyManager((BaseConnection) conn)
                     .copyIn("copy pass_in_trip(trip_id, psg_id, trip_date, trip_place) from STDIN (FORMAT CSV, HEADER, DELIMITER ',');",
-                            new BufferedReader(new FileReader("C:/Users/Serge/Desktop/homework_JDBC/pass_in_trip.txt"))
+                            new BufferedReader(new FileReader("C:\\Users\\Serge\\IdeaProjects\\airport_ms\\src\\main\\resources\\pass_in_trip.txt"))
                     );
             System.out.println("Rows inserted");
         } catch (SQLException | IOException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }
-

@@ -1,49 +1,20 @@
 package org.example.service;
 
-import org.example.interfaces.TripInterface;
-import org.example.tables.Trip;
+import org.example.models.Trip;
 
 import java.util.List;
 import java.util.Set;
 
-public class TripService implements TripInterface {
-    @Override
-    public Trip getById(long id) {
-        return null;
-    }
+public interface TripService {
 
-    @Override
-    public Set<Trip> getAll() {
-        return null;
-    }
+    Trip getById(long id);
+    Set<Trip> getAll();
+    Set<Trip> get(int offset, int perPage, String sort);
+    Trip save(Trip passenger);
+    Trip update(Trip passenger);
+    void delete(long tripId);
+    List<Trip> getTripsFrom(String city);
+    List<Trip> getTripsTo(String city);
 
-    @Override
-    public Set<Trip> get(int offset, int perPage, String sort) {
-        return null;
-    }
 
-    @Override
-    public Trip save(Trip passenger) {
-        return null;
-    }
-
-    @Override
-    public Trip update(Trip passenger) {
-        return null;
-    }
-
-    @Override
-    public void delete(long tripId) {
-
-    }
-
-    @Override
-    public List<Trip> getTripsFrom(String city) {
-        return null;
-    }
-
-    @Override
-    public List<Trip> getTripsTo(String city) {
-        return null;
-    }
 }
