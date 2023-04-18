@@ -3,20 +3,24 @@ package org.example.connection_util;
 import java.sql.*;
 
 public class ConnectionUtil {
-    private static Connection conn = null;
+    private static Connection conn;
+    private static ConnectionUtil connectionUtil;
 
-    static {
-          final String url = "jdbc:postgresql://localhost:5432/AirportManagementSystem";
-          final String user = "postgres";
-          final String password = "Klaus67phobia26!";
-        try {
+    private static final String URL = "jdbc:postgresql://localhost:5432/AirportManagementSystem";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "Klaus67phobia26!";
 
-            conn = DriverManager.getConnection(url, user, password);
-        }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public ConnectionUtil() {
     }
+
+    public static ConnectionUtil getInstance() {
+        if (connectionUtil==null)
+        {
+            connectionUtil = new ConnectionUtil();
+        }
+        return connectionUtil;
+    }
+
 
 
     /**
@@ -27,7 +31,12 @@ public class ConnectionUtil {
 
     public static Connection connectDB()
     {
-        return conn;
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            return conn;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
