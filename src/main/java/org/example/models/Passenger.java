@@ -1,5 +1,7 @@
 package org.example.models;
 
+import java.util.Objects;
+
 public class Passenger {
     private Long passenger_id;
     private String passenger_name;
@@ -8,6 +10,7 @@ public class Passenger {
     private String pass_city;
 
     public Passenger(Long passenger_id, String passenger_name, String pass_phone, String pass_country, String pass_city) {
+        super();
         this.passenger_id = passenger_id;
         this.passenger_name = passenger_name;
         this.pass_phone = pass_phone;
@@ -67,5 +70,24 @@ public class Passenger {
                 ", pass_country='" + pass_country + '\'' +
                 ", pass_city='" + pass_city + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(passenger_id, passenger_name, pass_phone,pass_country, pass_city);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Passenger other = (Passenger) obj;
+        return Objects.equals(passenger_name, other.passenger_name) && Objects.equals(pass_phone, other.pass_phone) &&
+                Objects.equals(pass_country, other.pass_country) && Objects.equals(pass_city, other.pass_city);
     }
 }

@@ -15,7 +15,7 @@ class PassengerServiceImpTest {
         pass.setPass_phone("99-714-8199");
         pass.setPass_country("Netherlands");
         pass.setPass_city("Amsterdam");
-        assertSame(ps.save(pass), ps.getById(1003L));
+        assertEquals(ps.save(pass), ps.getById(1003L));
     }
 
 }
